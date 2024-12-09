@@ -1,0 +1,9 @@
+{
+  "service_id": "screenshot-to-calendar-event-server",
+  "service_name": "Screenshot to Calendar Event Server",
+  "domain": "https://screenshot-to-calendar-event-server.noshado.ws",
+  "host": "localhost",
+  "port": "3109",
+  "author": "leo",
+  "created_on": "Sun 08 Dec 2024 08:19:23 PM EST"
+}
