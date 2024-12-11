@@ -21,7 +21,7 @@ app.post("/", async (req, res) => {
       messages: [
         {
           role: "assistant",
-          content: `Always return with valid JSON in this format: { "filename": short_description_of_the_event.ics, "content": ICS_file_content}`
+          content: `Always return with valid JSON in this format: { "filename": short-description-of-the-event.ics, "content": ICS_file_content}`
         },
         {
           role: "assistant",
