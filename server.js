@@ -15,14 +15,13 @@ const anthropic = new Anthropic({
 
 app.post("/", async (req, res) => {
   try {
-    const msg = await anthropic.messages.create({
+    const response = await anthropic.messages.create({
       model: "claude-3-5-sonnet-20241022",
       max_tokens: 1024,
       messages: [
         {
           role: "assistant",
-          content:
-            "Only return with the ICS file format content, nothing else (assume I will make it a .ics file and save it)"
+          content: `Always return with valid JSON in this format: { "filename": short_description_of_the_event.ics, "content": ICS_file_content}`
         },
         {
           role: "assistant",
@@ -50,7 +49,12 @@ app.post("/", async (req, res) => {
       ]
     });
 
-    res.json(msg);
+    const parsedResponse = JSON.parse(response.content[0].text);
+
+    const filename = parsedResponse.filename;
+    const content = parsedResponse.content.replace(/\n/g, "\r\n");
+
+    res.send(`filename:${filename}\nContent-Type:text/calendar\n\n${content}`);
   } catch (error) {
     console.error("Error processing request:", error);
     res.status(500).json({ error: "Internal server error" });
